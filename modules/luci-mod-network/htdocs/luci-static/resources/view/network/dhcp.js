@@ -261,6 +261,9 @@ return view.extend({
 			_('Authoritative'),
 			_('This is the only <abbr title="Dynamic Host Configuration Protocol">DHCP</abbr> in the local network'));
 
+		s.taboption('general', form.Flag, 'dns_redirect',
+			_('DNS Redirect'),
+			_('Redirect client DNS to dnsmasq'));
 
 		s.taboption('files', form.Flag, 'readethers',
 			_('Use <code>/etc/ethers</code>'),
@@ -287,6 +290,11 @@ return view.extend({
 
 		s.taboption('files', form.DynamicList, 'addnhosts',
 			_('Additional Hosts files')).optional = true;
+
+		o = s.taboption('advanced', form.Flag, 'filter_aaaa',
+			_('Disable IPv6 DNS forwards'),
+			_('Filter IPv6(AAAA) DNS Query Name Resolve'));
+		o.optional = true;
 
 		o = s.taboption('advanced', form.Flag, 'quietdhcp',
 			_('Suppress logging'),
@@ -452,6 +460,13 @@ return view.extend({
 		o.optional = true;
 		o.datatype = 'range(0,10000)';
 		o.placeholder = 150;
+
+		o = s.taboption('advanced', form.Value, 'mini_ttl',
+			_('Minimum TTL to send to clients'),
+			_('Modify DNS entries minimum TTL (max is 86400, 0 is no modify)'));
+		o.optional = true;
+		o.datatype = 'range(0,86400)';
+		o.placeholder = 0;
 
 		s.taboption('tftp', form.Flag, 'enable_tftp',
 			_('Enable TFTP server')).optional = true;
