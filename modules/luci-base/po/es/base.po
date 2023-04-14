@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-10 03:41+0200\n"
-"PO-Revision-Date: 2022-09-10 17:02+0000\n"
+"PO-Revision-Date: 2023-03-25 01:00+0000\n"
 "Last-Translator: Franco Castillo <castillofrancodamian@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/openwrt/luci/es/"
 ">\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1513
 msgid "%.1f dB"
@@ -227,7 +227,7 @@ msgstr "Sufijo (hex)<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/leds.js:58
 msgid "<abbr title=\"Light Emitting Diode\">LED</abbr> Configuration"
-msgstr "Configuración de <abbr title=\"Light Emitting Diode\">LED</abbr>"
+msgstr "Configuración de <abbr title=\"Light Emitting Diode\">LEDs</abbr>"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/leds.js:69
 msgid "<abbr title=\"Light Emitting Diode\">LED</abbr> Name"
@@ -242,9 +242,8 @@ msgid "<abbr title=\"Neighbour Discovery Protocol\">NDP</abbr>-Proxy"
 msgstr "Proxy <abbr title=\"Neighbour Discovery Protocol\">NDP</abbr>"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:791
-#, fuzzy
 msgid "<abbr title=\"Router Advertisement\">RA</abbr> Flags"
-msgstr "Indicador <abbr title=\"Router Advertisement\">RA</abbr>"
+msgstr "Indicadores <abbr title=\"Router Advertisement\">RA</abbr>"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:851
 msgid "<abbr title=\"Router Advertisement\">RA</abbr> Hop Limit"
@@ -1478,7 +1477,7 @@ msgid ""
 msgstr ""
 "Configura velocidades de datos según la densidad de la celda de cobertura. "
 "Normal configura las velocidades básicas a 6, 12, 24 Mbps si no se utilizan "
-"las velocidades heredadas de 802.11b, sino a 5,5, 11 Mbps. Alto configura "
+"las velocidades heredadas de 802.11b, sino a 5.5, 11 Mbps. Alto configura "
 "las velocidades básicas a 12, 24 Mbps si las velocidades de 802.11b "
 "heredadas no se utilizan más allá de la velocidad de 11 Mbps. Muy alto "
 "configura 24 Mbps como velocidad básica. No se ofrecen tarifas admitidas "
@@ -2957,6 +2956,7 @@ msgid "Global network options"
 msgstr "Opciones globales de red"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:72
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:86
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:62
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:82
 msgid "Go to password configuration..."
@@ -3255,7 +3255,7 @@ msgstr "Red IPv4 en notación de dirección / máscara de red"
 
 #: protocols/luci-proto-modemmanager/htdocs/luci-static/resources/protocol/modemmanager.js:128
 msgid "IPv4 only"
-msgstr "Sólo IPv4"
+msgstr "Solo IPv4"
 
 #: protocols/luci-proto-ipv6/htdocs/luci-static/resources/protocol/map.js:52
 msgid "IPv4 prefix"
@@ -3349,7 +3349,7 @@ msgstr "Red IPv6 en notación de dirección / máscara de red"
 
 #: protocols/luci-proto-modemmanager/htdocs/luci-static/resources/protocol/modemmanager.js:129
 msgid "IPv6 only"
-msgstr "Sólo IPv6"
+msgstr "Solo IPv6"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1022
 msgid "IPv6 preference"
@@ -3776,7 +3776,7 @@ msgstr ""
 "memoria flash de su equipo. ¡Por favor, verifique el archivo!"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:79
-#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:86
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:92
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:72
 msgid "JavaScript required!"
 msgstr "¡Se necesita JavaScript!"
@@ -4842,6 +4842,7 @@ msgid "No negative cache"
 msgstr "Sin caché negativa"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:69
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:83
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:59
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:79
 msgid "No password set!"
@@ -5416,7 +5417,7 @@ msgstr "PTM/EFM (Modo de transferencia de paquetes)"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1466
 msgid "Packet Steering"
-msgstr "Dirección de paquetes"
+msgstr "Direccionamiento de paquetes"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/iptables.js:54
 msgid "Packets"
@@ -5916,7 +5917,7 @@ msgstr "Refrescar"
 #: modules/luci-compat/luasrc/model/network/proto_relay.lua:153
 #: protocols/luci-proto-relay/htdocs/luci-static/resources/protocol/relay.js:39
 msgid "Relay"
-msgstr "Relé (relayd)"
+msgstr "Relé"
 
 #: modules/luci-compat/luasrc/model/network/proto_relay.lua:157
 #: protocols/luci-proto-relay/htdocs/luci-static/resources/protocol/relay.js:36
@@ -7594,6 +7595,7 @@ msgid "There are no changes to apply"
 msgstr "No hay cambios para aplicar"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:70
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:84
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:60
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:80
 msgid ""
@@ -8570,7 +8572,7 @@ msgstr ""
 "\"network\", ¡Tu dispositivo podría volverse inaccesible!</strong>"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:80
-#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:87
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:93
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:73
 msgid ""
 "You must enable JavaScript in your browser or LuCI will not work properly."

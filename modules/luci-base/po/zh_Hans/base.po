@@ -4,15 +4,15 @@
 #
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-08 00:12+0000\n"
-"Last-Translator: Eric <hamburger1024@mailbox.org>\n"
+"PO-Revision-Date: 2023-03-23 14:42+0000\n"
+"Last-Translator: Eric <hamburger2048@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "openwrt/luci/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1513
 msgid "%.1f dB"
@@ -421,9 +421,6 @@ msgstr "活动的 <abbr title=\"互联网协议第 6 版\">IPv6</abbr> 路由"
 msgid "Active Connections"
 msgstr "活动连接"
 
-msgid "Online Users"
-msgstr "在线用户数"
-
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:34
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/40_dhcp.js:182
 msgid "Active DHCP Leases"
@@ -465,7 +462,7 @@ msgstr "自适应传输负载均衡（balance-tlb，5）"
 #: modules/luci-compat/luasrc/view/cbi/ucisection.htm:54
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:885
 msgid "Add"
-msgstr "新增"
+msgstr "添加"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1526
 msgid "Add ATM Bridge"
@@ -533,18 +530,6 @@ msgstr "额外的 HOSTS 文件"
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:344
 msgid "Additional servers file"
 msgstr "额外的 SERVERS 文件"
-
-msgid "Disable IPv6 DNS forwards"
-msgstr "禁止解析 IPv6 DNS 记录"
-
-msgid "Filter IPv6(AAAA) DNS Query Name Resolve"
-msgstr "过滤掉 IPv6(AAAA) ，只返回 IPv4 DNS 域名记录"
-
-msgid "Minimum TTL to send to clients"
-msgstr "客户端缓存的最小 DNS TTL"
-
-msgid "Modify DNS entries minimum TTL (max is 86400, 0 is no modify)"
-msgstr "修改发送到客户端的域名记录的 TTL 时间 (最大 86400, 0 表示不修改)"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/30_network.js:34
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/30_network.js:35
@@ -2030,12 +2015,6 @@ msgstr "您确定要清除所有设置吗？"
 msgid "Do you really want to recursively delete the directory \"%s\" ?"
 msgstr "您确定要删除目录“%s”吗？"
 
-msgid "DNS Redirect"
-msgstr "DNS 重定向"
-
-msgid "Redirect client DNS to dnsmasq"
-msgstr "重定向客户端DNS到dnsmasq"
-
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:257
 msgid "Domain required"
 msgstr "忽略空域名解析"
@@ -2858,6 +2837,7 @@ msgid "Global network options"
 msgstr "全局网络选项"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:72
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:86
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:62
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:82
 msgid "Go to password configuration..."
@@ -3652,7 +3632,7 @@ msgid ""
 msgstr "您尝试刷写的固件与此设备不兼容，请检查固件文件！"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:79
-#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:86
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:92
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:72
 msgid "JavaScript required!"
 msgstr "需要 JavaScript！"
@@ -4691,6 +4671,7 @@ msgid "No negative cache"
 msgstr "禁用无效信息缓存"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:69
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:83
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:59
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:79
 msgid "No password set!"
@@ -7276,6 +7257,7 @@ msgid "There are no changes to apply"
 msgstr "没有待应用的更改"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:70
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:84
 #: themes/luci-theme-openwrt-2020/luasrc/view/themes/openwrt2020/header.htm:60
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:80
 msgid ""
@@ -8205,7 +8187,7 @@ msgstr ""
 "果禁用了必要的启动脚本，比如“network”，可能会导致无法访问设备！</strong>"
 
 #: themes/luci-theme-bootstrap/luasrc/view/themes/bootstrap/header.htm:80
-#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:87
+#: themes/luci-theme-material/luasrc/view/themes/material/header.htm:93
 #: themes/luci-theme-openwrt/luasrc/view/themes/openwrt.org/header.htm:73
 msgid ""
 "You must enable JavaScript in your browser or LuCI will not work properly."
@@ -8750,39 +8732,6 @@ msgstr "是"
 #: modules/luci-compat/luasrc/view/cbi/delegator.htm:20
 msgid "« Back"
 msgstr "« 后退"
-
-msgid "Enables The 802.11k standard provides information to discover the best available access point"
-msgstr "启用 802.11k 自动寻找发现最佳可用接入点的信息"
-
-msgid "Enable neighbor report via radio measurements"
-msgstr "启用无线电测量邻居报告"
-
-msgid "Enable beacon report via radio measurements"
-msgstr "启用无线电测量信标报告"
-
-msgid "Enables 802.11v allows client devices to exchange information about the network topology,tating overall improvement of the wireless network."
-msgstr "启用 802.11v 将允许客户端设备交换有关网络拓扑的信息，从而全面改善无线网络漫游"
-
-msgid "extended sleep mode for stations"
-msgstr "扩展无线休眠节能模式"
-
-msgid "BSS Transition Management"
-msgstr "BSS 传输管理"
-
-msgid "Time advertisement"
-msgstr "广播同步时间"
-
-msgid "time zone"
-msgstr "时区"
-
-msgid "Local time zone as specified in 8.3 of IEEE Std 1003.1-2004"
-msgstr "本地时区采用 IEEE Std 1003.1-2004 的 8.3 格式（例如 UTC8）"
-
-msgid "Enable 256-QAM"
-msgstr "启用 256-QAM"
-
-msgid "802.11n 2.4Ghz Only"
-msgstr "只适合 802.11n 2.4Ghz"
 
 #~ msgid "Enable promiscious mode"
 #~ msgstr "启用混杂模式"
