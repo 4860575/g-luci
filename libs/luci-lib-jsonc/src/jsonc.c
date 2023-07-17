@@ -28,12 +28,6 @@ limitations under the License.
 #define LUCI_JSONC "luci.jsonc"
 #define LUCI_JSONC_PARSER "luci.jsonc.parser"
 
-struct seen {
-	size_t size;
-	size_t len;
-	const void *ptrs[];
-};
-
 struct json_state {
 	struct json_object *obj;
 	struct json_tokener *tok;
@@ -42,7 +36,6 @@ struct json_state {
 
 static void _json_to_lua(lua_State *L, struct json_object *obj);
 static struct json_object * _lua_to_json(lua_State *L, int index);
-static struct json_object * _lua_to_json_rec(lua_State *L, int index, struct seen **seen);
 
 static int json_new(lua_State *L)
 {
@@ -213,9 +206,6 @@ static int _lua_test_array(lua_State *L, int index)
 	int max = 0;
 	lua_Number idx;
 
-	if (!lua_checkstack(L, 2))
-		return -1;
-
 	lua_pushnil(L);
 
 	/* check for non-integer keys */
@@ -260,54 +250,16 @@ out:
 	return max;
 }
 
-
-static bool visited(struct seen **sp, const void *ptr) {
-	struct seen *s = *sp;
-	size_t i;
-
-	if (s->len >= s->size)
-	{
-		i = s->size + 10;
-		s = realloc(*sp, sizeof(struct seen) + sizeof(void *) * i);
-
-		if (!s)
-		{
-			if (*sp)
-				free(*sp);
-
-			*sp = NULL;
-			return true;
-		}
-
-		s->size = i;
-		*sp = s;
-	}
-
-	for (i = 0; i < s->len; i++)
-		if (s->ptrs[i] == ptr)
-			return true;
-
-	s->ptrs[s->len++] = ptr;
-	return false;
-}
-
-static struct json_object * _lua_to_json_rec(lua_State *L, int index,
-                                             struct seen **seen)
+static struct json_object * _lua_to_json(lua_State *L, int index)
 {
 	lua_Number nd, ni;
 	struct json_object *obj;
 	const char *key;
 	int i, max;
 
-	if (index < 0)
-		index = lua_gettop(L) + index + 1;
-
 	switch (lua_type(L, index))
 	{
 	case LUA_TTABLE:
-		if (visited(seen, lua_topointer(L, index)))
-			return NULL;
-
 		max = _lua_test_array(L, index);
 
 		if (max >= 0)
@@ -317,15 +269,12 @@ static struct json_object * _lua_to_json_rec(lua_State *L, int index,
 			if (!obj)
 				return NULL;
 
-			if (!lua_checkstack(L, 1))
-				return NULL;
-
 			for (i = 1; i <= max; i++)
 			{
 				lua_rawgeti(L, index, i);
 
 				json_object_array_put_idx(obj, i - 1,
-				                          _lua_to_json_rec(L, -1, seen));
+				                          _lua_to_json(L, lua_gettop(L)));
 
 				lua_pop(L, 1);
 			}
@@ -338,9 +287,6 @@ static struct json_object * _lua_to_json_rec(lua_State *L, int index,
 		if (!obj)
 			return NULL;
 
-		if (!lua_checkstack(L, 3))
-			return NULL;
-
 		lua_pushnil(L);
 
 		while (lua_next(L, index))
@@ -350,7 +296,7 @@ static struct json_object * _lua_to_json_rec(lua_State *L, int index,
 
 			if (key)
 				json_object_object_add(obj, key,
-				                       _lua_to_json_rec(L, -2, seen));
+				                       _lua_to_json(L, lua_gettop(L) - 1));
 
 			lua_pop(L, 2);
 		}
@@ -365,35 +311,16 @@ static struct json_object * _lua_to_json_rec(lua_State *L, int index,
 
 	case LUA_TNUMBER:
 		nd = lua_tonumber(L, index);
-		ni = lua_tointeger(L, index);
-
-		if (nd == ni)
+		if(nd >= INT64_MIN && nd <= INT64_MAX)
 			return json_object_new_int64(nd);
-
-		return json_object_new_double(nd);
+		else
+			return json_object_new_double(nd);
 
 	case LUA_TSTRING:
 		return json_object_new_string(lua_tostring(L, index));
 	}
 
 	return NULL;
-}
-
-static struct json_object * _lua_to_json(lua_State *L, int index)
-{
-	struct seen *s = calloc(sizeof(struct seen) + sizeof(void *) * 10, 1);
-	struct json_object *rv;
-
-	if (!s)
-		return NULL;
-
-	s->size = 10;
-
-	rv = _lua_to_json_rec(L, index, &s);
-
-	free(s);
-
-	return rv;
 }
 
 static int json_parse_set(lua_State *L)

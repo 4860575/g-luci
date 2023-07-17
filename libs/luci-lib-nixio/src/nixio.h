@@ -21,10 +21,6 @@
 #include <lauxlib.h>
 #include <luaconf.h>
 
-#if LUA_VERSION_NUM < 501
-#define luaL_Reg luaL_reg
-#endif
-
 #define NIXIO_BUFFERSIZE 8192
 
 typedef struct nixio_socket {

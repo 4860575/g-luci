@@ -1,24 +1,13 @@
 %.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(FPIC) -DNDEBUG -c -o $@ $<
-
-contrib/lemon: contrib/lemon.c contrib/lempar.c
-	cc -o contrib/lemon $<
-
-plural_formula.c: plural_formula.y contrib/lemon
-	./contrib/lemon -q $<
-
-template_lmo.c: plural_formula.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(FPIC) -c -o $@ $<
 
 clean:
-	rm -f contrib/lemon po2lmo parser.so version.lua plural_formula.c plural_formula.h *.o
+	rm -f po2lmo parser.so version.lua *.o
 
-jsmin: jsmin.o
+po2lmo: po2lmo.o template_lmo.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-po2lmo: po2lmo.o template_lmo.o plural_formula.o
-	$(CC) $(LDFLAGS) -o $@ $^
-
-parser.so: template_parser.o template_utils.o template_lmo.o template_lualib.o plural_formula.o
+parser.so: template_parser.o template_utils.o template_lmo.o template_lualib.o
 	$(CC) $(LDFLAGS) -shared -o $@ $^
 
 version.lua:

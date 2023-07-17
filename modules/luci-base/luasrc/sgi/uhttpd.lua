@@ -18,17 +18,7 @@ function handle_request(env)
 		SCRIPT_NAME     = env.SCRIPT_NAME:gsub("/+$", ""),
 		SCRIPT_FILENAME = env.SCRIPT_NAME,
 		SERVER_PROTOCOL = env.SERVER_PROTOCOL,
-		QUERY_STRING    = env.QUERY_STRING,
-		DOCUMENT_ROOT   = env.DOCUMENT_ROOT,
-		HTTPS           = env.HTTPS,
-		REDIRECT_STATUS = env.REDIRECT_STATUS,
-		REMOTE_ADDR     = env.REMOTE_ADDR,
-		REMOTE_NAME     = env.REMOTE_NAME,
-		REMOTE_PORT     = env.REMOTE_PORT,
-		REMOTE_USER     = env.REMOTE_USER,
-		SERVER_ADDR     = env.SERVER_ADDR,
-		SERVER_NAME     = env.SERVER_NAME,
-		SERVER_PORT     = env.SERVER_PORT
+		QUERY_STRING    = env.QUERY_STRING
 	}
 
 	local k, v
@@ -54,7 +44,6 @@ function handle_request(env)
 	local req = luci.http.Request(
 		renv, recv, luci.ltn12.sink.file(io.stderr)
 	)
-
 
 	local x = coroutine.create(luci.dispatcher.httpdispatch)
 	local hcache = { }

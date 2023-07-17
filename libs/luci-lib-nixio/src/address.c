@@ -24,7 +24,6 @@
 
 #ifdef __linux__
 
-#include <sys/time.h>
 #include <signal.h>
 #include <setjmp.h>
 #include <unistd.h>
@@ -290,7 +289,6 @@ static int nixio_getnameinfo(lua_State *L) {
 #ifdef __linux__
 	struct sigaction sa_new, sa_old;
 	int timeout = luaL_optnumber(L, 3, 0);
-	const struct itimerval t = { {timeout * 1000 * 1000, 0} , {0, 0} };
 	if (timeout > 0 && timeout < 1000)
 	{
 		sa_new.sa_handler = nixio__handle_alarm;
@@ -310,7 +308,7 @@ static int nixio_getnameinfo(lua_State *L) {
 			return 3;
 		}
 
-		setitimer(ITIMER_REAL, &t, NULL);
+		ualarm(timeout * 1000, 0);
 	}
 #endif
 
@@ -341,7 +339,7 @@ static int nixio_getnameinfo(lua_State *L) {
 #ifdef __linux__
 	if (timeout > 0 && timeout < 1000)
 	{
-		alarm(0);
+		ualarm(0, 0);
 		sigaction(SIGALRM, &sa_old, NULL);
 	}
 #endif
@@ -544,7 +542,7 @@ static int nixio_getifaddrs(lua_State *L) {
 
 
 /* module table */
-static const luaL_Reg R[] = {
+static const luaL_reg R[] = {
 #if defined(__linux__) || defined(BSD)
 	{"getifaddrs",	nixio_getifaddrs},
 #endif
@@ -554,7 +552,7 @@ static const luaL_Reg R[] = {
 };
 
 /* object table */
-static const luaL_Reg M[] = {
+static const luaL_reg M[] = {
 	{"getsockname",	nixio_sock_getsockname},
 	{"getpeername",	nixio_sock_getpeername},
 	{NULL,			NULL}
