@@ -16,6 +16,10 @@ local function fastpath_status()
 	return luci.sys.call("/etc/init.d/turboacc check_status fastpath") == 0
 end
 
+local function bbr_status()
+	return luci.sys.call("/etc/init.d/turboacc check_status bbr") == 0
+end
+
 local function fullconenat_status()
 	return luci.sys.call("/etc/init.d/turboacc check_status fullconenat") == 0
 end

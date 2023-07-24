@@ -10,6 +10,43 @@ s = m:section(TypedSection, "turboacc", "")
 s.addremove = false
 s.anonymous = true
 
+if nixio.fs.access("/lib/modules/" .. kernel_version .. "/xt_FLOWOFFLOAD.ko") then
+sw_flow = s:option(Flag, "sw_flow", translate("Software flow offloading"))
+sw_flow.default = 0
+sw_flow.description = translate("Software based offloading for routing/NAT")
+if nixio.fs.access("/lib/modules/" .. kernel_version .. "/mtkhnat.ko") then
+sw_flow:depends("hw_flow", 0)
+else
+sw_flow:depends("sfe_flow", 0)
+end
+end
+
+if luci.sys.call("cat /etc/openwrt_release | grep -Eq 'filogic|mt762' ") == 0 then
+hw_flow = s:option(Flag, "hw_flow", translate("Hardware flow offloading"))
+hw_flow.default = 0
+hw_flow.description = translate("Requires hardware NAT support. Implemented at least for mt762x")
+if nixio.fs.access("/lib/modules/" .. kernel_version .. "/mtkhnat.ko") then
+hw_flow:depends("sw_flow", 0)
+else
+hw_flow:depends("sw_flow", 1)
+end
+end
+
+if nixio.fs.access("/lib/modules/" .. kernel_version .. "/shortcut-fe-cm.ko")
+or nixio.fs.access("/lib/modules/" .. kernel_version .. "/fast-classifier.ko")
+then
+sfe_flow = s:option(Flag, "sfe_flow", translate("Shortcut-FE flow offloading"))
+sfe_flow.default = 0
+sfe_flow.description = translate("Shortcut-FE based offloading for routing/NAT")
+sfe_flow:depends("sw_flow", 0)
+end
+
+if nixio.fs.access("/lib/modules/" .. kernel_version .. "/tcp_bbr.ko") then
+bbr_cca = s:option(Flag, "bbr_cca", translate("BBR CCA"))
+bbr_cca.default = 0
+bbr_cca.description = translate("Using BBR CCA can improve TCP network performance effectively")
+end
+
 if nixio.fs.access("/lib/modules/" .. kernel_version .. "/xt_FULLCONENAT.ko") then
 fullcone_nat = s:option(Flag, "fullcone_nat", translate("FullCone NAT"))
 fullcone_nat.default = 0
@@ -37,7 +74,7 @@ dns_caching_mode.default = 1
 dns_caching_mode:depends("dns_caching", 1)
 
 dns_caching_dns = s:option(Value, "dns_caching_dns", translate("Upsteam DNS Server"))
-dns_caching_dns.default = "114.114.114.114,223.5.5.5,119.29.29.29"
+dns_caching_dns.default = "114.114.114.114,114.114.115.115,223.5.5.5,223.6.6.6,180.76.76.76,119.29.29.29,119.28.28.28,1.2.4.8,210.2.4.8"
 dns_caching_dns.description = translate("Muitiple DNS server can saperate with ','")
 dns_caching_dns:depends("dns_caching", 1)
 
